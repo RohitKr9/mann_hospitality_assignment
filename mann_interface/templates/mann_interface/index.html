@@ -18,14 +18,28 @@
     <button type="button" id="show_table">Show Table</button>
     <div id="table"></div>
 
+    <form action="/mail_summary" method="post" id="mail_summary">
+        <label for="recipient_mail">Enter a mail:</label>
+        <input type="email" id="recipient_mail" name="recipient_mail">
+        <button type="submit">Send Mail</button>
+    </form>
+
     <script>
         let myfile 
 
         const form = document.getElementById("upload_form")
         const table = document.getElementById("table")
         const button_show_table = document.getElementById("show_table")
+        const form_mail_summary = document.getElementById("mail_summary")
+        const recipient_mail = document.getElementById("recipient_mail").value
+
+        console.log("THIS IS TEST")
+        console.log(recipient_mail)
+        console.log("THIS US EST")
+        
         form.addEventListener('submit', uploadFile)
         button_show_table.addEventListener('click', showFile)
+        form_mail_summary.addEventListener('submit', mail_summary)
 
         async function uploadFile(event) {
             event.preventDefault()
@@ -45,6 +59,23 @@
         function showFile(event){
             table.innerHTML = myfile
             console.log(myfile)
+        }
+
+        function mail_summary(event){
+            event.preventDefault()
+            const form_data = new FormData(form_mail_summary)
+
+            url = form_mail_summary.action
+            console.log(url)
+
+            fetch(url,{
+                method: form_mail_summary.method,
+                body: form_data
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data)
+            })
         }
     </script>
 {% endblock content %}
