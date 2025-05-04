@@ -18,7 +18,7 @@ def fileUpload(request):
     if request.method == 'POST':
         myfile = request.FILES.get('myfile')
         my_df_file = pd.read_csv(myfile)
-        print(my_df_file)
+        #print(my_df_file)
 
         request.session['mydffile_as_json'] = my_df_file.to_json()
 
@@ -74,8 +74,20 @@ def downloadFilteredFile(request):
         str_date = str(date)
         filtered_df = mydffile[(mydffile['Restaurant Name'] == resturant) & (mydffile['Order Date'].astype(str).str.contains(str_date))]
 
-        print(filtered_df.to_csv())
+        #print(filtered_df.to_csv())
         return HttpResponse(filtered_df.to_csv())
     return HttpResponseBadRequest()
 
-
+def deleteFilteredFile(request):
+    if request.method == 'POST' and request.session['mydffile_as_json']:
+        date = request.POST.get('date')
+        resturant = request.POST.get('resto')
+        mydffile = pd.DataFrame(json.loads(request.session['mydffile_as_json']))
+        str_date = str(date)
+        filtered_df_indcies = mydffile[(mydffile['Restaurant Name'] == resturant) & (mydffile['Order Date'].astype(str).str.contains(str_date))].index
+        mydffile.drop(index=filtered_df_indcies, inplace=True)
+        request.session['mydffile_as_json'] = mydffile.to_json()
+        print(mydffile)
+        print(filtered_df_indcies)
+        return HttpResponse(mydffile.to_html()) 
+    return HttpResponseBadRequest()

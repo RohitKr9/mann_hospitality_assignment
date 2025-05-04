@@ -25,7 +25,7 @@ overflow: auto;
     <button type="submit">Send Mail</button>
 </form>
 
-<form action="/get_filterd_data" method="post" id="filtered_data">
+<form method="post" id="filtered_data">
     <label for="date">select a date:</label>
     <input type="date" id="date" name="date">
     <label for="resto">select a resturant:</label>
@@ -56,16 +56,13 @@ overflow: auto;
     const download_button = document.getElementById("download_button")
     const delete_button = document.getElementById("delete_button")
 
-    console.log("THIS IS TEST")
-    console.log(recipient_mail)
-    console.log("THIS US EST")
-
     form.addEventListener('submit', uploadFile)
     button_show_table.addEventListener('click', showFile)
     form_mail_summary.addEventListener('submit', mail_summary)
     download_button.addEventListener('click', downloadFilteredFile)
+    delete_button.addEventListener('click', deleteFilteredRow)
 
-    async function uploadFile(event) {
+    function uploadFile(event) {
         event.preventDefault()
         const file_as_form = new FormData(form)
 
@@ -82,7 +79,7 @@ overflow: auto;
 
     function showFile(event) {
         table.innerHTML = myfile
-        console.log(myfile)
+        //console.log(myfile)
     }
 
     function mail_summary(event) {
@@ -102,7 +99,7 @@ overflow: auto;
             })
     }
 
-    async function downloadFilteredFile(event) {
+    function downloadFilteredFile(event) {
         event.preventDefault()
         const file_as_form = new FormData(download_or_deletefilter)
 
@@ -126,9 +123,24 @@ overflow: auto;
                 URL.revokeObjectURL(url_blob)
                 // myfilteredfile = data
             })
+    }
 
+    function deleteFilteredRow(event) {
+        console.log("THIS IS TEST")
+        event.preventDefault()
+        const myform = new FormData(download_or_deletefilter)
 
-
+        fetch("/delete_filtered", {
+            method: 'POST',
+            body: myform
+        })
+            .then(response => response.text())
+            .then(data => {
+                //table.innerHTML = data
+                console.log(data)
+                myfile = data
+                button_show_table.click()
+            })
     }
 </script>
 {% endblock content %}
