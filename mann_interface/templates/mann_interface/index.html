@@ -4,6 +4,7 @@
     #table{
         height: 75vh;
         border: solid;
+        overflow: auto;
     }
 {% endblock styles %}
 
@@ -15,9 +16,7 @@
         <button type="submit">upload</button>
     </form>
     <button type="button" id="show_table">Show Table</button>
-    <div id="table">
-
-    </div>
+    <div id="table"></div>
 
     <script>
         let myfile 
@@ -36,7 +35,7 @@
                 method: form.method,
                 body: file_as_form
             })
-            .then(response => response)
+            .then(response => response.text())
             .then(data => {
                 console.log(data)
                 myfile = data
