@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mann Hospitality</title>
+
+    <link href="/your-path-to-uicons/css/uicons-[your-style].css" rel="stylesheet">
+    <style>
+        
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            body {
+                height: 100vh;
+                width: 100vw;
+            }
+            header {
+                height: 12vh;
+                background: #c4103d;
+            }
+            .container{
+                background: #A0A0A0;
+                height: 88vh;
+            }
+            {% block styles %}
+    {% endblock styles %}
+</style>
+    
+</head>
+
+<body>
+    <header>
+        <div id="top-header">
+            <div id="icon">
+                <div class="myicon"></div>
+                <div class="title">Mann Hospitality</div>
+            </div>
+            <nav id="navigation">
+                <li class="items"> Home</li>
+                <li class="items"> Our Brands</li>
+                <li class="items"> About us</li>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+
+</html>
