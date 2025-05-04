@@ -65,3 +65,17 @@ def sendMailWithSummary(request):
         return HttpResponse()
 
     return HttpResponseBadRequest()
+
+def downloadFilteredFile(request):
+    if request.method == 'POST' and request.session['mydffile_as_json']:
+        date = request.POST.get('date')
+        resturant = request.POST.get('resto')
+        mydffile = pd.DataFrame(json.loads(request.session['mydffile_as_json']))
+        str_date = str(date)
+        filtered_df = mydffile[(mydffile['Restaurant Name'] == resturant) & (mydffile['Order Date'].astype(str).str.contains(str_date))]
+
+        print(filtered_df.to_csv())
+        return HttpResponse(filtered_df.to_csv())
+    return HttpResponseBadRequest()
+
+
