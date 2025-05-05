@@ -4,45 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap" rel="stylesheet">
+
     <title>Mann Hospitality</title>
 
     <style>
-        
-            * {
-                padding: 0;
-                margin: 0;
-                box-sizing: border-box;
-            }
-            body {
-                height: 100vh;
-                width: 100vw;
-            }
-            header {
-                height: 12vh;
-                background: #c4103d;
-            }
-            .container{
-                background: #A0A0A0;
-                height: 88vh;
-            }
-            {% block styles %}
-    {% endblock styles %}
-</style>
-    
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+
+        }
+        body{
+            font-family: "Cal Sans", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        #top-header{
+            position: relative;
+            background: #c4103d;
+            color: whitesmoke;
+            font-size: 50px;
+        }
+        button{
+            color: white;
+            background-color: #c4103d;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0px 0px 2px 2px #c4103d;
+            padding: 8px 20px;
+            margin: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        {% block styles %}
+
+        {% endblock styles %}
+    </style>
+
 </head>
 
 <body>
     <header>
         <div id="top-header">
-            <div id="icon">
-                <div class="myicon"></div>
-                <div class="title">Mann Hospitality</div>
-            </div>
-            <nav id="navigation">
-                <li class="items"> Home</li>
-                <li class="items"> Our Brands</li>
-                <li class="items"> About us</li>
-            </nav>
+                <div class="title"><b>Mann Hospitality</b></div>
         </div>
     </header>
     <div class="container">
