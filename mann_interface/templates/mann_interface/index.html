@@ -24,7 +24,7 @@ overflow: auto;
     <label for="recipient_mail">Enter mail ID for summary:</label>
     <input type="email" id="recipient_mail" name="recipient_mail">
     <button type="submit">Send Mail</button>
-    
+    <span id="mail_msg"></span>
 </form>
 
 <form method="post" id="filtered_data">
@@ -43,6 +43,7 @@ overflow: auto;
     </select>
     <button type="button" id="download_button">Download</button>
     <button type="button" id="delete_button">Delete</button>
+    <span id="filter_msg"></span>
 </form>
 
 <script>
@@ -58,6 +59,8 @@ overflow: auto;
     const download_button = document.getElementById("download_button")
     const delete_button = document.getElementById("delete_button")
     const confirmation_msg = document.getElementById("confirmation_msg")
+    const mail_msg = document.getElementById("mail_msg")
+    const filter_msg = document.getElementById("filter_msg")
 
     form.addEventListener('submit', uploadFile)
     button_show_table.addEventListener('click', showFile)
@@ -100,6 +103,7 @@ overflow: auto;
             .then(response => response.text())
             .then(data => {
                 // console.log(data)
+                mail_msg.innerHTML = "Mail sent"
             })
     }
 
@@ -144,6 +148,7 @@ overflow: auto;
                 console.log(data)
                 myfile = data
                 button_show_table.click()
+                filter_msg.innerHTML = "Filtered data deleted"
             })
     }
 </script>
